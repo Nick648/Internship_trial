@@ -3,28 +3,27 @@
 def add_potion_to_book(count_potion: str, potion: list) -> None:
     recipe = dict()
     for piece in potion:
-        key = str(piece)
-        if piece == 1:
-            if "1" in recipe:
-                recipe["1"] += 1
+        if piece == "1":
+            if "A" in recipe:
+                recipe["A"] += 1
             else:
-                recipe["1"] = 1
-        elif piece == 2:
-            if "2" in recipe:
-                recipe["2"] += 1
+                recipe["A"] = 1
+        elif piece == "2":
+            if "B" in recipe:
+                recipe["B"] += 1
             else:
-                recipe["2"] = 1
-        elif key in recipe_book:
-            for item in recipe_book[key]:
+                recipe["B"] = 1
+        elif piece in recipe_book:
+            for item in recipe_book[piece]:
                 if item in recipe:
-                    recipe[item] += recipe_book[key][item]
+                    recipe[item] += recipe_book[piece][item]
                 else:
-                    recipe[item] = recipe_book[key][item]
+                    recipe[item] = recipe_book[piece][item]
         else:
             if piece in recipe:
-                recipe[key] += 1
+                recipe[piece] += 1
             else:
-                recipe[key] = 1
+                recipe[piece] = 1
     recipe_book[count_potion] = recipe
 
 
@@ -32,16 +31,16 @@ def get_answer(x: int, y: int, s: str) -> str:
     if s in recipe_book:
         if 1 <= len(recipe_book[s]) <= 2:
             recipe = recipe_book[s]
-            if x > 0:
-                if ["1"] in recipe and recipe["1"] >= x:
-                    return "1"
-                else:
+            count_x, count_y = 0, 0
+            if "A" in recipe:
+                count_x = recipe["A"]
+            if "B" in recipe:
+                count_y = recipe["B"]
+            # print(f"{recipe=};{count_x=};{count_y=};{x=};{y=}")
+            if x >= count_x and y >= count_y:
+                if count_y == 0 and count_x == 0:
                     return "0"
-            if y > 0:
-                if ["2"] in recipe and recipe["2"] >= y:
-                    return "1"
-                else:
-                    return "0"
+                return "1"
     return "0"
 
 
@@ -53,6 +52,7 @@ if __name__ == '__main__':
     for count_potion in range(3, count + 1):
         potion = list(map(str, input().split()))[1:]
         add_potion_to_book(str(count_potion), potion)
+    # print(f"{recipe_book=}")
     query_count = int(input())
     for _ in range(query_count):
         x, y, s = map(int, input().split())
