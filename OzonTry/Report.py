@@ -1,22 +1,34 @@
-from timeit import timeit
+def gen(x: int):
+    i = 0
+    while i < x:
+        yield i
+        i += 1
 
 
 def get_ans() -> str:
     count_report = int(input())
     reports = tuple(input().split())
+    k = reports[0]
+    passed = f" {k} "
     if len(reports) == len(set(reports)):
         return "YES"
-    # for i in range(1, count_report):
-    for pos, item in enumerate(reports):
-        if item == reports[pos - 1]:
+    for pos in gen(count_report):
+        if reports[pos] == k:
             continue
-        elif item in reports[:pos]:
+        elif f" {reports[pos]} " in passed:
             return "NO"
+        else:
+            k = reports[pos]
+            passed = f"{passed} {k} "
     return "YES"
 
 
-if __name__ == '__main__':
+def main() -> None:
     count_data = int(input())
-    %%timeit
-    for _ in range(count_data):
+    while count_data:
         print(get_ans())
+        count_data -= 1
+
+
+if __name__ == '__main__':
+    main()
