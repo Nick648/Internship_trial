@@ -1,6 +1,9 @@
 https://routejunior.contest.codeforces.com/group/H3VxISVcTk/contest/421983  <-  contest
-https://routejunior.contest.codeforces.com/group/H3VxISVcTk/contest/421983/problem/A  <-  contest A
+https://routejunior.contest.codeforces.com/group/H3VxISVcTk/contest/421983/problem/A  <-  contest A (Adder (5 points))
 https://routejunior.contest.codeforces.com/group/H3VxISVcTk/contest/421983/problem/B  <-  contest B
 https://routejunior.contest.codeforces.com/group/H3VxISVcTk/contest/421983/problem/C  <-  contest C
 https://routejunior.contest.codeforces.com/group/H3VxISVcTk/contest/421983/problem/D  <-  contest D
 https://routejunior.contest.codeforces.com/group/H3VxISVcTk/contest/421983/problem/E  <-  contest E
+https://routejunior.contest.codeforces.com/group/H3VxISVcTk/contest/421983/problem/F  <-  contest F
+https://routejunior.contest.codeforces.com/group/H3VxISVcTk/contest/421983/problem/G  <-  contest G
+https://routejunior.contest.codeforces.com/group/H3VxISVcTk/contest/421983/problem/H  <-  contest H

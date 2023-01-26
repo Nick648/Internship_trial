@@ -1,5 +1,5 @@
 def gen(x: int):
-    i = 0
+    i = 1
     while i < x:
         yield i
         i += 1
@@ -7,20 +7,15 @@ def gen(x: int):
 
 def get_ans() -> str:
     count_report = int(input())
-    reports = tuple(input().split())
-    k = reports[0]
-    passed = f" {k} "
-    if len(reports) == len(set(reports)):
-        return "YES"
+    data = input().split()
+    data_1 = [data[0]]
     for pos in gen(count_report):
-        if reports[pos] == k:
-            continue
-        elif f" {reports[pos]} " in passed:
-            return "NO"
-        else:
-            k = reports[pos]
-            passed = f"{passed} {k} "
-    return "YES"
+        if data[pos] != data[pos - 1]:
+            data_1.append(data[pos])
+    if len(data_1) == len(set(data)):
+        return "YES"
+    else:
+        return "NO"
 
 
 def main() -> None:
@@ -32,3 +27,4 @@ def main() -> None:
 
 if __name__ == '__main__':
     main()
+    # read_file()
