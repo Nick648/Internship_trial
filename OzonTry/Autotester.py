@@ -16,25 +16,25 @@ YELLOW = Fore.LIGHTYELLOW_EX
 CYAN = Fore.LIGHTCYAN_EX
 RESET = Style.RESET_ALL
 
-# Constants for path
+# Constants for path!
 DOWNLOADS_DIR = path.expanduser('~') + r'\Downloads'
-dir_name = 'tests/tests'
-TESTS_PATH = path.join(DOWNLOADS_DIR, dir_name)
+DIR_TESTS_NAME = 'tests_I/tests'
+TESTS_PATH = path.join(DOWNLOADS_DIR, DIR_TESTS_NAME)
 
 # Constant for time control (in seconds) *for thread
 TIME_TEST_LIMIT = 10
 flag_stop = False
 
 
-def error_out(s: str) -> None:  # Вывод красного текста
+def error_out(s: str) -> None:  # Red text output
     print(RED + s, sep='')
 
 
-def done_out(s: str) -> None:  # Вывод зелёного текста
+def done_out(s: str) -> None:  # Green text output
     print(GREEN + s, sep='')
 
 
-def yellow_out(s: str) -> None:  # Вывод жёлтого текста
+def yellow_out(s: str) -> None:  # Yellow text output
     print(YELLOW + s, sep='')
 
 
@@ -51,39 +51,39 @@ def time_counter_control() -> None:  # Add exit code here!
     # print(CYAN + f'\tПоток {threading.currentThread()} выполнился.' + RESET)
 
 
-def generator_files_tests_str() -> str:
+def generator_files_tests_str() -> str:  # Returning text from test files
     for file in listdir(TESTS_PATH):
         if file[-2:] != '.a':
             file_path = path.join(TESTS_PATH, file)
             with open(file=file_path, mode='r', encoding='utf-8') as f:
-                print(file_path)
+                # print(file_path)
                 yield f.read()
 
 
-def generator_files_answers_str() -> str:
+def generator_files_answers_str() -> str:  # Returning text from answer files
     for file in listdir(TESTS_PATH):
         if file[-2:] == '.a':
             file_path = path.join(TESTS_PATH, file)
             with open(file=file_path, mode='r', encoding='utf-8') as f:
-                print(file_path, type(f))
+                # print(file_path, type(f))
                 yield f.read()
 
 
-def generator_files_tests_name() -> str:
+def generator_files_tests_name() -> str:  # Returning the full path to the test files
     for file in listdir(TESTS_PATH):
         if file[-2:] != '.a':
             file_path = path.join(TESTS_PATH, file)
             yield file_path
 
 
-def generator_files_answers_name() -> str:
+def generator_files_answers_name() -> str:  # Returning the full path to the answer files
     for file in listdir(TESTS_PATH):
         if file[-2:] == '.a':
             file_path = path.join(TESTS_PATH, file)
             yield file_path
 
 
-def generator_files_name() -> tuple:
+def generator_files_name() -> tuple:  # Returning the full path to the test and answer files and their names
     cur_file = ""
     for file in listdir(TESTS_PATH):
         # print(f"{file=}; {cur_file=}; {file[-2:]}; {file[:-1]}")
@@ -109,6 +109,7 @@ def user_query(question="Output error details?") -> bool:
             print(RED + 'Enter the appropriate answer: (Y/N)\n' + RESET)
 
 
+# The main verification algorithm
 def check_validate_tests():
     global flag_stop
     for name, test_name_file, answer_name_file in generator_files_name():
@@ -147,7 +148,7 @@ def check_validate_tests():
         print(log)
 
 
-# запускаем тестирование
+# Starting testing
 if __name__ == '__main__':
     start_message = YELLOW + " Autotest for code " + RESET
     print("\n", "{:*^75}".format(start_message), "\n", sep='')
