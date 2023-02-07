@@ -12,6 +12,9 @@ class Tree:
     def set_kids(self, kid):
         self.kids.append(kid)
 
+    def set_product(self, product):
+        self.product = product
+
     def get_name(self) -> int:
         return self.name
 
@@ -39,29 +42,36 @@ class Tree:
 
     @classmethod
     def display_tree(cls) -> None:
+        print("Current Tree:\n")
         cur_town = Tree.main_town
         print(f"{cur_town.get_name()}")
         for kid in cur_town.get_kids():
             kid.display_town("\t")
+        print()
 
 
 def main() -> None:
-    count_town = int(input())
+    count_town = int(input("Введите количество городов(узлов): "))
     tree_town = [i + 1 for i in range(count_town)]
     tree_town[0] = Tree(1)
+    print("\nНадо ввести дороги между городами в виде цифр; Example: 1 2")
+    print(f"P.S. Count of roads = {count_town - 1}\n")
     for _ in range(count_town - 1):
-        t_1, t_2 = map(int, input().split())
-        if isinstance(tree_town[t_1 - 1], Tree):
+        t_1, t_2 = map(int, input("Дорога между городами: ").strip().split())
+        if isinstance(tree_town[t_1 - 1], Tree) and not isinstance(tree_town[t_2 - 1], Tree):
             tree_town[t_2 - 1] = Tree(t_2, tree_town[t_1 - 1])
             tree_town[t_1 - 1].set_kids(tree_town[t_2 - 1])
-        elif isinstance(tree_town[t_2 - 1], Tree):
+        elif isinstance(tree_town[t_2 - 1], Tree) and not isinstance(tree_town[t_1 - 1], Tree):
             tree_town[t_1 - 1] = Tree(t_1, tree_town[t_2 - 1])
             tree_town[t_2 - 1].set_kids(tree_town[t_1 - 1])
+        else:
+            print("\nError! Один из городов уже должен быть создан другой ещё не создан!")
+            print("P.S. Город под номером 1 был создан с самого начала\n")
     # print(f"{tree=}")
-    # Tree.display_tree()
-    transportation = int(input())
+    Tree.display_tree()
+    transportation = int(input("Количество поставок: "))
     for _ in range(transportation):
-        num_town, level, package = map(int, input().split())
+        num_town, level, package = map(int, input("Номер города, На сколько спускаемся, Размер посылки: ").split())
         tree_town[num_town - 1].delivery(level, package)
 
     for town in tree_town:
