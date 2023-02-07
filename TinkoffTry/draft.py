@@ -1,48 +1,36 @@
-def main():
-    v = 42
-    print(f"Begin {v=}")
-    for i in range(1, 22):
-        l = v / (i + 1)
-        v -= l
-        print(f"{i=}; {v=}")
-        # v = v/(i+1) * i
-    print(f"End {v=}")
+def check_req(quotes: list, wood: int, count_q: int, count_wood: int, count_day: int, cur_i: int) -> int:
+    count_day += 1
+    new_quotes = quotes[cur_i:]
+    for i in range(len(new_quotes)):
+        count_wood += max(0, new_quotes[i] - i)
+        if count_wood >= wood:
+            return count_day  # yield
+        check_req(new_quotes, wood, count_q, count_wood, count_day, i + 1)
 
 
-def main_2():
-    s = 0
-    k = 1
-    while s <= 7:
-        print(f"Cycle {s=}; {k=}")
-        k += 1
-        s += k
-        print(f"Cycle2 {s=}; {k=}")
-    print(f"End {s=}; {k=}")
-
-
-def main_3():
-    a = 10
-    b = 5
-    if (a > 1) or (a < b):
-        a -= 5
-    if (a > 1) and (a == b):
-        a -= 5
-    print(f"{a=}")
-
-
-def main_4():
-    arr = [8, 6, 3, 1, 5, 3, 10]
-    print(f"Begin {arr=}")
-    for i in range(6):
-        for j in range(7 - i - 1):
-            if arr[j] > arr[j + 1]:
-                arr[j], arr[j + 1] = arr[j + 1], arr[j]
-            # print(f"New iter: {arr=}")
-    print(f"Sorted array: {arr=}")
+def main() -> None:
+    count_q, wood = map(int, input().split())
+    quotes = list(map(int, input().split()))
+    if sum(quotes) < wood:
+        print(-1)
+        return
+    min_day = count_q
+    quotes.sort(reverse=True)
+    count_wood, count_day = 0, 1
+    for i in range(count_q):
+        count_wood += max(0, quotes[i] - i)
+        if count_wood >= wood:
+            print(1)
+            return
+        day = check_req(quotes, wood, count_q, count_wood, count_day, i + 1)
+        if day and day < min_day:
+            min_day = day
+        # for day in check_req(quotes, wood, count_q, count_wood, count_day, i + 1):
+        #     print(f"{day=}")
+        #     if day and day < min_day:
+        #         min_day = day
+    print(min_day)
 
 
 if __name__ == '__main__':
-    # main()
-    # main_2()
-    # main_3()
-    main_4()
+    main()
