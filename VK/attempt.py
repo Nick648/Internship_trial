@@ -60,11 +60,48 @@ def t4():
     print(d)
 
 
+def t5():
+    n = 10
+    k = 0
+    for i in range(n):
+        for j in range(n):
+            if (i + j) % 2 == 1:
+                print(1, end=' ')
+                k += 1
+            else:
+                print(0, end=' ')
+        print()
+    print(f'{k=}')
+
+
+def t6():
+    import matplotlib.pyplot as plt
+
+    fig, ax = plt.subplots()
+
+    ax.plot([0, 20], [100, 250], 'r', label='obj1')
+    ax.plot([15, 200], [30, 35], 'g', label='obj2')
+    ax.plot([0, 200], [10, 20], 'y', label='obj3')
+    ax.plot([0, 2], [1, 5], 'p', label='obj4')
+    ax.plot([5, 30], [120, 130], 'b', label='obj')
+    ax.set(title='Line & Markers - 2 points')
+    ax.legend()
+
+    plt.xlabel('Width')
+    plt.ylabel('Height')
+    ax = fig.gca()
+    fig.tight_layout()
+    plt.grid()
+    plt.show()
+
+
 if __name__ == '__main__':
     # t1()
     # t2()
     # t3()
-    t4()
+    # t4()
+    # t5()
+    # t6()
     pass
 
 '''
