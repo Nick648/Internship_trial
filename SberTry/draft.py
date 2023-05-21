@@ -7,7 +7,8 @@ class Bank:
         return self.name + self.date
 
 
-sber = Bank("Sberbank", "1841")
-x = sber.__dict__
-print(x)
-print(len(x))
+# sber = Bank("Sberbank", "1841")
+# x = sber.__dict__
+# print(x)
+# print(len(x))
+
