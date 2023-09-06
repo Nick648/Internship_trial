@@ -1,4 +1,5 @@
 from itertools import combinations
+import math
 
 
 class Analytic:
@@ -37,25 +38,22 @@ def analytics():  # For another test
         print(f'{count_less=}')
 
 
-def find_sum():
-    for n in range(n_cash * 2):
-        for comb in combinations(cash, n + 1):
-            if sum(comb) == need_sum:
-                final_comb = comb
-                return final_comb
-    return ()
+def test_2():
+    for a in range(1, 10 ** 4):
+        for b in range(1, 10 ** 4):
+            if a * a + b == a * (999 - b):
+                print(f'{a=}; {b=}')
+
+
+def test_3():
+    a = [1, 1]
+    print('i=1 -> 1\ni=2 -> 1')
+    for i in range(3, 21):
+        a.append(a[i - 2] + a[i - 3] + math.gcd(a[i - 2], a[i - 3]))
+        print(f'i={i-1} -> {a[i-1]}')
 
 
 if __name__ == '__main__':
     # analytics()
-    need_sum, n_cash = map(int, input().split())
-    cash = list(map(int, input().split()))
-    for i in range(0, n_cash + 1, 2):
-        cash.insert(i, cash[i])
-    ans = find_sum()
-    if ans:
-        print(len(ans))
-        for item in ans:
-            print(item, end=' ')
-    else:
-        print(-1)
+    # test_2()
+    test_3()
